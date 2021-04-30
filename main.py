@@ -21,8 +21,32 @@ class Player:
         self.fuck += 1
     def raiseKill(self):
         self.kill += 1
+    def getSum(self):
+        return self.marry+self.fuck+self.kill
+    def getmarrypercent(self):
+        if self.getSum() == 0:
+            return 0
+        else:
+            this = 100*self.marry//self.getSum()
+            return this
+    def getfuckpercent(self):
+        if self.getSum() == 0:
+            return 0
+        else:
+            this = 100*self.fuck//self.getSum()
+            return this
+    def getkillpercent(self):
+        if self.getSum() == 0:
+            return 0
+        else:
+            this = 100*self.kill//self.getSum()
+            return this
+
     def getAttribute(self):
-        return [self.name, self.marry, self.fuck, self.kill]
+        return [self.name, 
+        "{} ({}%)".format(self.marry, self.getmarrypercent()),
+        "{} ({}%)".format(self.fuck, self.getfuckpercent()),
+        "{} ({}%)".format(self.kill, self.getkillpercent())]
     def getAllstats():
         output = [['Charakter', 'Marry', 'Fuck', 'Kill']]
         for character in Player.all_player_list:

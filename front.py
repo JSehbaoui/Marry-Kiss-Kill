@@ -68,7 +68,6 @@ right_surface = pygame.Surface(right_surface_properties)
 #creating a list with all subsurfaces
 subsurfaces = [top_surface, left_surface, middle_surface, right_surface]
 
-
 #creating the labels for "Marry", "Fuck" and "Kill"
 labels = [font.render("Marry", True, black), font.render("Fuck", True, black), font.render("Kill", True, black)]
 
@@ -79,11 +78,11 @@ while go:
 
     #creating three tiles with anyone representing one of the chosen entries 
     tile_left   = Tile(master = left_surface, x = 0, y = 0, w = tile_size[0], h = tile_size[1],
-        color_t = (255, 255, 255), command = lambda:[print("Hello World!")], name = victims[0].getName())
+        color_t = (255, 255, 255), command = lambda:[print("Hello World!")], name = victims[0].getName(), anchor_point_y=HEIGHT*(1/5))
     tile_middle = Tile(master = middle_surface, x = 0, y = 0, w = tile_size[0], h = tile_size[1],
-        color_t = (255, 255, 255), command = lambda:[print("Hello World!")], name = victims[1].getName(), anchor_point_x=WIDTH*(1/3))
+        color_t = (255, 255, 255), command = lambda:[print("Hello World!")], name = victims[1].getName(), anchor_point_x=WIDTH*(1/3), anchor_point_y=HEIGHT*(1/5))
     tile_right  = Tile(master = right_surface, x = 0, y = 0, w = tile_size[0], h = tile_size[1],
-        color_t = (255, 255, 255), command = lambda:[print("Hello World!")], name = victims[2].getName(), anchor_point_x=WIDTH*(2/3))
+        color_t = (255, 255, 255), command = lambda:[print("Hello World!")], name = victims[2].getName(), anchor_point_x=WIDTH*(2/3), anchor_point_y=HEIGHT*(1/5))
     all_tiles = [tile_left, tile_middle, tile_right]
 
     #starting the window
@@ -94,14 +93,16 @@ while go:
 
         #resetting the surface
         surface.fill(grass_green)
+        top_surface.fill(grass_green)
 
         #drawing all tiles
         for tile in all_tiles:
             tile.draw()
-        
+
         #drawing labels
+        fuck_label_prop_w = labels[1].get_rect()[0]
         for label in labels:
-            top_surface.blit(label, (labels.index(label)*300+50, 50))
+            top_surface.blit(label, ((fuck_label_prop_w+WIDTH)*(1/2)-300+labels.index(label)*300, 50))
         
         #checking for events
         for event in pygame.event.get():

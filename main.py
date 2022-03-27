@@ -219,11 +219,26 @@ indem ihr "MANUELL" als Option eingebt.
 def info():
     print("Du kannst das Spiel jederzeit beenden, indem du 'STOP' eingibst.")
 
-
+def getRounds() -> int:
+    print("Wieviele Runden wollt ihr spielen? Keine Eingabe -> 5 Runden")
+    done = False
+    while not done:
+        playerInput = input("Anzahl der Runden: ")
+        try:
+            playerInput = int(playerInput)
+            done = True
+        except ValueError:
+            print("Bitte eine Zahl eingeben!!")
+    
+    return playerInput
 
 def main():
+    
+    rounds_int = 5
+    
     greetings()
     players = playerInput()
+    rounds_int = getRounds()
     characters = characterInput()
     Turn.border()
     Turn.border()
@@ -231,11 +246,9 @@ def main():
     Turn.space(3)
     Turn.border()
 
-    rounds_int = 5
+    
 
     game = Turn(players=players, characters=characters)
-
-
 
     while rounds_int > 0:
         game.doTurn()

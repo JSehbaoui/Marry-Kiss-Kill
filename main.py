@@ -14,7 +14,8 @@ class Player:
         self.fuck = 0
         self.kill = 0
         Player.all_player_list.append(self)
-
+    def getName(self):
+        return self.name
     def raiseMarry(self):
         self.marry += 1
     def raiseFuck(self):
@@ -41,7 +42,6 @@ class Player:
         else:
             this = 100*self.kill//self.getSum()
             return this
-
     def getAttribute(self):
         return [self.name, 
         "{} ({}%)".format(self.marry, self.getmarrypercent()),
